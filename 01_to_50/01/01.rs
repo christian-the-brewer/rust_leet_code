@@ -8,21 +8,18 @@ fn main() {
    println!("{:?}",sum_to_target([1,2,3,4].to_vec(), 6)); 
 }
 
-fn sum_to_target (nums: Vec<i32>, target: i32) -> (i32, i32) {
+fn sum_to_target (nums: Vec<i32>, target: i32) -> Vec<i32> {
     let mut map: HashMap<i32, i32> = HashMap::new();
     let mut complement: i32;
 
     for (index, number) in nums.into_iter().enumerate() {
         complement = target - number;
-        println!("number: {} index: {}, complement: {}", &number, &index, &complement);
-        println!("map so far: {:?}", &map);
         if map.contains_key(&number) {
-            return (index as i32, *map.get(&number).unwrap());
+            return [index as i32, *map.get(&number).unwrap()].to_vec();
         } else {
             map.insert(complement, index as i32);
         
         }
     };
-    println!("{:?}", map);
     unreachable!();
 }
